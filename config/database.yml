@@ -9,20 +9,13 @@ development:
   adapter: postgresql
   encoding: utf8
   database: food_trucks_sf_development
-  pool: 5
-  username: 
-  password:
 
 test: &TEST
   adapter: postgresql
   encoding: utf8
   database: food_trucks_sf_test
-  pool: 5
-  username: 
-  password:
 
 production:
   adapter: postgresql
   encoding: utf8
   database: food_trucks_sf_production
-  pool: 5
