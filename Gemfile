@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'backbone-on-rails'
 gem 'bcrypt', '~> 3.1.7'
+gem "bootstrap-sass"
 gem 'figaro'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
