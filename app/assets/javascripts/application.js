@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require underscore
 //= require backbone
+//= require jquery.serializeJSON.js
 //= require food_trucks
 //= require_tree ./utils
 //= require_tree ../templates

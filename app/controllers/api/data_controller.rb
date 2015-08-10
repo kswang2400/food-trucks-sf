@@ -4,7 +4,6 @@ module Api
       client = SODA::Client.new({:domain => "data.sfgov.org", :app_token => ENV["socrata_app_token"]})
 
       if params[:location]
-        # DO SOMETHING WITH LOCATION location[:longitude], location[:latitude]
         lat = params[:location][:latitude].to_f
         long = params[:location][:longitude].to_f
         query_string = "latitude > #{lat - 0.1} AND latitude < #{lat + 0.1} AND longitude > #{long - 0.1} AND longitude < #{long + 0.1}"
@@ -19,8 +18,7 @@ module Api
           { "$limit" => 20, 
             "$where" => "latitude IS NOT NULL AND longitude IS NOT NULL" })
       end
-      # fail
-      # redirect_to "/#index"
+
       render json: response
     end
   end
