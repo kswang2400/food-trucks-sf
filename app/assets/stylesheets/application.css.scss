@@ -16,3 +16,36 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.app-front-page {
+  text-align: center;
+}
+
+#app-title {
+  padding-top: 30px;
+  color: white;
+  font-size: 100px;
+}
+
+#app-links {
+  color: white;
+  font-size: 20px;
+  margin-top: 50px;
+}
+
+#main { 
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url("http://res.cloudinary.com/du0durr8z/image/upload/q_100/v1439248486/foodtruckhawaii_inyfem.jpg");
+  background-size: 100% 100%;
+}
+/*
+#main {
+  background: url();
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+}*/
