@@ -1,1 +1,0 @@
-(function(){this.JST||(this.JST={}),this.JST.index=function(obj){var __p=[];with(obj||{})__p.push("<div>\n  <h1>HELLO WORLD</h1>\n</div>\n");return __p.join("")}}).call(this);
