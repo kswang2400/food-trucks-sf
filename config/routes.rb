@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
- resources :data
+  root to: "static_pages#root"
+  
+  resources :data
 end

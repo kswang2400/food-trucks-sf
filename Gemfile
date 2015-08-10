@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'backbone-on-rails'
 gem 'rails', '4.2.3'
 gem 'rspec-rails'
 gem 'pg'
