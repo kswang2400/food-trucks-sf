@@ -1,3 +1,4 @@
-<div>
-  <h1>HELLO WORLD</h1>
-</div>
+<h1>All <%= trucks.length %> Trucks</h1>
+<% trucks.each(function (truck) { %>
+  <%= truck.escape("applicant") %><br>
+<% }) %>

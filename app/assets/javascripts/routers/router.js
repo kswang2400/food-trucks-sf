@@ -8,14 +8,14 @@ FoodTrucks.Routers.Router = Backbone.Router.extend({
   },
 
   index: function () {
-    alert('index');
-    var view = new FoodTrucks.Views.Index();
+    var trucks= new FoodTrucks.Collections.Trucks();
+    trucks.fetch();
+    var view = new FoodTrucks.Views.Index({ trucks: trucks });
 
     this._swapView(view);
   },
 
   _swapView: function (view) {
-    alert('swap');
     this._currentView && this._currentView.remove();
     this._currentView = view;
     this.$root.html(view.$el);
