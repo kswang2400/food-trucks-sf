@@ -4,6 +4,7 @@ FoodTrucks.Views.Index = Backbone.View.extend({
 
   initialize: function (options) {
     this.collection = options.trucks;
+
     this.listenTo(this.collection, 'sync', this.render);
   },
 
@@ -12,4 +13,4 @@ FoodTrucks.Views.Index = Backbone.View.extend({
     this.$el.html(content);
     return this;
   }
-})
+});
