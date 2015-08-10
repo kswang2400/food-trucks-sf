@@ -18,6 +18,7 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
     var content = this.template({ trucks: this.collection });
     this.$el.html(content);
     this.attachSubviews();
+    $("#location-search").locationSearch();
     return this;  
   }
 });
