@@ -6,8 +6,8 @@ module Api
         { "$limit" => 100, 
           "$where" => "latitude IS NOT NULL AND longitude IS NOT NULL" })
       
-      if params[:query]
-
+      if params[:location]
+        # DO SOMETHING WITH LOCATION location[:longitude], location[:latitude]
       end
       fail
       render json: response

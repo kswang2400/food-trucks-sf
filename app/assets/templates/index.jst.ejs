@@ -1,7 +1,11 @@
 <h1>All <%= trucks.length %> Trucks</h1>
 
 <div id="location-search">
-  <input id="form-control" type="text" name="location" placeholder="Enter your location (latitude and longitude) ...">
+  <form action="/api/data">
+    <input id="form-control" type="text" name="location[longitude]" placeholder="Longitude">
+    <input id="form-control" type="text" name="location[latitude]" placeholder="Latitude">
 
+    <input type="submit" value="Submit">
+  </form>
   <ul id="trucks-list"></ul>
 </div>
