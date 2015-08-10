@@ -28,7 +28,9 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
         longitude: longitude
       }}
 
-      this.collection.fetch({ data: query });     
+      $("#trucks-list").empty();
+
+      this.collection.fetch({ data: query}, { merge: true });     
     }.bind(this));
   },
 
@@ -44,11 +46,6 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
 
     var query = this.$el.find("#location-search-form").serializeJSON();
 
-    this.collection.fetch({ 
-      data: query,
-      success: function () {
-        alert("HURRAY")
-      }
-    });
+    this.collection.fetch({ data: query });
   }
 });

@@ -7,11 +7,12 @@ module Api
         p "hehe"
         lat = params[:location][:latitude].to_f
         long = params[:location][:longitude].to_f
-        query_string = "latitude > #{lat - 0.1} AND latitude < #{lat + 0.1} AND longitude > #{long - 0.1} AND longitude < #{long + 0.1}"
-        
+        query_string = "latitude > #{lat - 0.01} AND latitude < #{lat + 0.01} AND longitude > #{long - 0.01} AND longitude < #{long + 0.01}"
+
         response = client.get("6a9r-agq8",
           { "$limit" => 20,
-            "$where" => query_string})
+            "$where" => query_string
+          })
 
         response = "No trucks near there, where you at?" if response.empty?
       elsif
