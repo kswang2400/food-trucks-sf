@@ -1,6 +1,6 @@
 FoodTrucks.Views.Index = Backbone.CompositeView.extend({
   template: JST["index"],
-  className: "index",
+  className: "index col-md-8 col-md-offset-2",
 
   events: {
     "click #search-input": "searchByLocation",

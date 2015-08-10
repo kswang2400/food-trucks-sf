@@ -1,12 +1,14 @@
 <h1>All <%= trucks.length %> Trucks</h1>
 
-<form id="location-search-form">
+<!-- FOR DEVELOPMENT PURPOSES ONLY -->
+<!-- <form id="location-search-form">
   <input id="form-control" type="text" name="location[latitude]" placeholder="Latitude">
   <input id="form-control" type="text" name="location[longitude]" placeholder="Longitude">
 
   <input id="search-input" type="submit" value="Search!">
 </form>
+ -->
 
-<br><input id="search-current" type="submit" value="Search by Current Location">
+<input class="btn btn-lg btn-success" id="search-current" type="submit" value="Search by Current Location">
 
 <ul id="trucks-list"></ul>

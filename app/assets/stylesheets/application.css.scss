@@ -33,6 +33,10 @@
   margin-top: 50px;
 }
 
+#location-search-form {
+  margin: 12px;
+}
+
 #main { 
   position: fixed;
   top: 0;
@@ -42,10 +46,28 @@
   background: url("http://res.cloudinary.com/du0durr8z/image/upload/q_100/v1439248486/foodtruckhawaii_inyfem.jpg");
   background-size: 100% 100%;
 }
-/*
-#main {
-  background: url();
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100%;
-}*/
+
+.index {
+  background-color: #eee;
+  padding: 12px;
+  opacity: 0.9;
+  text-align: center;
+  margin-top: 30px;
+}
+
+#search-current {
+  margin: 12px;
+}
+
+.truck-list-item {
+  margin: 4px;
+}
+
+#trucks-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+
+
+
