@@ -4,7 +4,9 @@ module Api
       # was { domain => https://data.sfgov.org }
       # https://www.ruby-forum.com/topic/152151
       client = SODA::Client.new({:domain => "data.sfgov.org", :app_token => ENV["socrata_app_token"]})
-      response = client.get("6a9r-agq8", { "$limit" => 25 })
+      response = client.get("6a9r-agq8", 
+        { "$limit" => 100, 
+          "$where" => "latitude IS NOT NULL AND longitude IS NOT NULL" })
 
       render json: response
 
