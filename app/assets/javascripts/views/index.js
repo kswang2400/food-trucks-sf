@@ -3,7 +3,8 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
   className: "index",
 
   events: {
-    "click #search": "searchLocation"
+    "click #search-input": "searchByLocation",
+    "click #search-current": "searchByCurrentLocation"
   },
 
   initialize: function (options) {
@@ -18,6 +19,19 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
     this.addSubview("#trucks-list", subview);
   },
 
+  searchByCurrentLocation: function () {
+    navigator.geolocation.getCurrentPosition(function (pos) { 
+      var latitude = pos.coords.latitude
+      var longitude = pos.coords.longitude
+      var query = { location: {
+        latitude: latitude,
+        longitude: longitude
+      }}
+
+      this.collection.fetch({ data: query });     
+    }.bind(this));
+  },
+
   render: function () {
     var content = this.template({ trucks: this.collection });
     this.$el.html(content);
@@ -25,10 +39,11 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
     return this;  
   },
 
-  searchLocation: function (event) {
+  searchByLocation: function (event) {
     event.preventDefault();
+
     var query = this.$el.find("#location-search-form").serializeJSON();
-    // debugger;
+
     this.collection.fetch({ 
       data: query,
       success: function () {

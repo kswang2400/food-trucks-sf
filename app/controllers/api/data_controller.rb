@@ -4,6 +4,7 @@ module Api
       client = SODA::Client.new({:domain => "data.sfgov.org", :app_token => ENV["socrata_app_token"]})
 
       if params[:location]
+        p "hehe"
         lat = params[:location][:latitude].to_f
         long = params[:location][:longitude].to_f
         query_string = "latitude > #{lat - 0.1} AND latitude < #{lat + 0.1} AND longitude > #{long - 0.1} AND longitude < #{long + 0.1}"
