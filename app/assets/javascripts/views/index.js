@@ -20,6 +20,7 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
   },
 
   searchByCurrentLocation: function () {
+    $('#spinner').show();
     navigator.geolocation.getCurrentPosition(function (pos) { 
       var latitude = pos.coords.latitude
       var longitude = pos.coords.longitude
@@ -30,7 +31,13 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
 
       $("#trucks-list").empty();
 
-      this.collection.fetch({ data: query}, { merge: true });     
+      this.collection.fetch({ 
+        data: query,
+        reset: true,
+        success: function (response) {
+          console.log(response);
+        }.bind(this)
+      });     
     }.bind(this));
   },
 
