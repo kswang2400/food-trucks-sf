@@ -29,8 +29,6 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
         longitude: longitude
       }}
 
-      // $("#trucks-list").empty();
-
       this.collection.fetch({ data: query });     
     }.bind(this));
   },
