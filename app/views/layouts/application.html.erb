@@ -6,8 +6,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
 
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['google_maps_api'] %>">
-    </script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
   </head>
   <body>
     <div id="main">

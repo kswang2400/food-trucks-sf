@@ -12,14 +12,13 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
     this.listenTo(this.collection, "sync", this.render);
     this.listenTo(this.collection, "add", this.addTruckListItemSubview);
 
-    google.maps.event.addDomListener(window, 'load', function () {
-      var mapOptions = {
-        center: { lat: -34.397, lng: 150.644},
-        zoom: 8
-      };
+    var map;
 
-      var map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
+    google.maps.event.addDomListener(window, 'load', function () {
+      map = new google.maps.Map(document.getElementById('map-canvas'), {
+        zoom: 14,
+        center: {lat: 37.78, lng: -122.41}
+      }); 
     });
   },
 
