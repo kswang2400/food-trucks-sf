@@ -9,6 +9,7 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.collection = options.trucks;
 
+    // KW: Don't call rerender or else google maps goes ape shit
     // this.listenTo(this.collection, "sync", this.render);
     // this.listenTo(this.collection, "add", this.addTruckListItemSubview);
 
