@@ -3,7 +3,6 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
   className: "index col-md-6 col-md-offset-4",
 
   events: {
-    "click #search-input": "searchByLocation",
     "click #search-current": "searchByCurrentLocation"
   },
 
@@ -20,7 +19,7 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
   },
 
   searchByCurrentLocation: function () {
-    $('#spinner').show();
+    $("#spinner").show();
     navigator.geolocation.getCurrentPosition(function (pos) { 
       var latitude = pos.coords.latitude
       var longitude = pos.coords.longitude
@@ -29,7 +28,14 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
         longitude: longitude
       }}
 
-      this.collection.fetch({ data: query });     
+      this.collection.fetch({ 
+        data: query, 
+        error: function (col, err) {
+          console.log(err.responseText);
+          $("#error-message").show();
+          $("#spinner").hide();
+        }
+      });     
     }.bind(this));
   },
 
@@ -38,13 +44,5 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.attachSubviews();
     return this;  
-  },
-
-  searchByLocation: function (event) {
-    event.preventDefault();
-
-    var query = this.$el.find("#location-search-form").serializeJSON();
-
-    this.collection.fetch({ data: query });
   }
 });
