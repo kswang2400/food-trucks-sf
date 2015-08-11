@@ -5,19 +5,6 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
-
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $("#spinner").bind("ajaxSend", function() {
-            $(this).show();
-        }).bind("ajaxStop", function() {
-            $(this).hide();
-        }).bind("ajaxError", function() {
-            $(this).hide();
-        });
-     
-         });
-    </script>
   </head>
   <body>
     <div id="main">

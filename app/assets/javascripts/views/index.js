@@ -1,6 +1,6 @@
 FoodTrucks.Views.Index = Backbone.CompositeView.extend({
   template: JST["index"],
-  className: "index col-md-8 col-md-offset-2",
+  className: "index col-md-6 col-md-offset-4",
 
   events: {
     "click #search-input": "searchByLocation",
@@ -29,15 +29,9 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
         longitude: longitude
       }}
 
-      $("#trucks-list").empty();
+      // $("#trucks-list").empty();
 
-      this.collection.fetch({ 
-        data: query,
-        reset: true,
-        success: function (response) {
-          console.log(response);
-        }.bind(this)
-      });     
+      this.collection.fetch({ data: query });     
     }.bind(this));
   },
 

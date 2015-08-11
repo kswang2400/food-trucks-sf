@@ -22,9 +22,10 @@
 }
 
 #app-title {
-  padding-top: 30px;
   color: white;
   font-size: 100px;
+  /*margin-left: 160px;*/
+  padding-top: 30px;
 }
 
 #app-links {
@@ -43,7 +44,8 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: url("http://res.cloudinary.com/du0durr8z/image/upload/q_100/v1439248486/foodtruckhawaii_inyfem.jpg");
+  background: url("http://cdn.wonderfulengineering.com/wp-content/uploads/2015/05/San-Francisco-Wallpaper.jpeg");
+  /*background: url("https://images.unsplash.com/photo-1428342319217-5fdaf6d7898e?q=80&fm=jpg&s=8d9ff51d52b4d6e74fb4c73975eb0926");*/
   background-size: 100% 100%;
 }
 
@@ -60,16 +62,16 @@
 }
 
 .spinner {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-left: -50px; /* half width of the spinner gif */
-    margin-top: -50px; /* half height of the spinner gif */
-    text-align:center;
-    z-index:1234;
-    overflow: auto;
-    width: 124px; /* width of the spinner gif */
-    height: 124px; /*hight of the spinner gif +2px to fix IE8 issue */
+  height: 124px;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -100px;
+  overflow: auto;
+  position: fixed;
+  text-align:center;
+  top: 50%;
+  width: 124px;
+  z-index:10;
 }
 
 .truck-list-item {
