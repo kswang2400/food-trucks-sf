@@ -41,7 +41,7 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
       var longitude = location["coordinates"][0]
       var latitude = location["coordinates"][1]
       var name = truck.get("applicant")
-      console.log(name, longitude, latitude);
+      console.log(name, longitude, latitude, truck.get("status"));
 
       var myLatlng = new google.maps.LatLng(latitude, longitude);
       var marker = new google.maps.Marker({

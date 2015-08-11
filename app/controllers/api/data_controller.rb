@@ -12,7 +12,8 @@ module Api
 
         response = client.get("6a9r-agq8",
           { "$limit" => 50,
-            "$where" => query_string
+            "$where" => query_string,
+            :status => "APPROVED"
           })
         # KW: query a ton and then paginate in the front end
 
