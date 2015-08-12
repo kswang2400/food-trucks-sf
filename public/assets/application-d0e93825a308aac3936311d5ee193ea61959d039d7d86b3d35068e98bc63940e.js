@@ -16898,6 +16898,23 @@ FoodTrucks.Views.Index = Backbone.View.extend({
     $("#spinner").hide();
   },
 
+  initializeMap: function () {
+    alert('in here now')
+    this.map = new google.maps.Map(document.getElementById('map-canvas'), {
+      zoom: 14,
+      center: {lat: this.latitude, lng: this.longitude}
+    });
+
+    var myLatlng = new google.maps.LatLng(this.latitude , this.longitude);
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: this.map,
+      title: "You are here!"
+    });
+    
+    $("#map-spinner").hide();
+  },
+
   searchByCurrentLocation: function () {
     var that = this;
 
@@ -16927,6 +16944,11 @@ FoodTrucks.Views.Index = Backbone.View.extend({
     window.location.reload()
   },
 
+  renderMap: function () {
+    alert('rendering map')
+    google.maps.event.addDomListener(window, 'load', this.initializeMap.bind(this)); 
+  },
+
   render: function () {
     var content = this.template();
     this.$el.html(content);
@@ -16937,23 +16959,9 @@ FoodTrucks.Views.Index = Backbone.View.extend({
 
       // this.latitude = 37.781     // app academy address
       // this.longitude = -122.41
-
-      google.maps.event.addDomListener(window, 'load', function () {
-        this.map = new google.maps.Map(document.getElementById('map-canvas'), {
-          zoom: 14,
-          center: {lat: this.latitude, lng: this.longitude}
-        });
-
-        var myLatlng = new google.maps.LatLng(this.latitude , this.longitude);
-        var marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title: "You are here!"
-        });
-        
-        $("#map-spinner").hide();
-      });
-    });
+      console.log(this.latitude, this.longitude)
+      this.renderMap();
+    }.bind(this));
 
     setTimeout(function () {
       $("#map-not-load").show();
