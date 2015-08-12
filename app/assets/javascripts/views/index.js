@@ -3,7 +3,8 @@ FoodTrucks.Views.Index = Backbone.View.extend({
   className: "index col-md-6 col-md-offset-4",
 
   events: {
-    "click #search-current": "searchByCurrentLocation"
+    "click #search-current": "searchByCurrentLocation",
+    "click #refresh": "refreshPage"
   },
 
   addTruckMarker: function (trucks) {
@@ -51,6 +52,10 @@ FoodTrucks.Views.Index = Backbone.View.extend({
         error: that.handleError
       });     
     });
+  },
+
+  refreshPage: function () {
+    window.location.reload()
   },
 
   render: function () {
