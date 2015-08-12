@@ -11,7 +11,7 @@ module Api
         query_string = "latitude > #{lat - 0.01} AND latitude < #{lat + 0.01} AND longitude > #{long - 0.01} AND longitude < #{long + 0.01}"
 
         response = client.get("6a9r-agq8",
-          { "$limit" => 50,
+          { "$limit" => 15,
             "$where" => query_string,
             :status => "APPROVED"
           })

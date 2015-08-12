@@ -16852,7 +16852,7 @@ $.fn.locationSearch = function () {
     new $.LocationSearch(this);
   });
 };
-(function() { this.JST || (this.JST = {}); this.JST["index"] = function(obj){var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<h1>Hungry? Find Food Trucks Near You!</h1>\n\n<input class="btn btn-lg btn-success" id="search-current" type="submit" value="Search by Current Location">\n\n<div id="spinner" class="spinner" style="display:none;">\n  <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>\n</div>\n\n<div id="map-canvas">\n  <div id="map-spinner" class="spinner" style="display:visible;">\n    <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>\n  </div>\n  <button class="btn btn-lg btn-success" id="refresh">Refresh</button>\n</div>\n\n</div>\n\n<div id="error-message" style="display:none;">\n  <h4>There are no trucks near you :(</h4>\n</div>\n');}return __p.join('');};
+(function() { this.JST || (this.JST = {}); this.JST["index"] = function(obj){var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<h1>Hungry? Find Food Trucks Near You!</h1>\n\n<input class="btn btn-lg btn-success" id="search-current" type="submit" value="Search by Current Location">\n\n<div id="spinner" class="spinner" style="display:none;">\n  <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>\n</div>\n\n<div id="map-canvas">\n  <div id="map-spinner" class="spinner" style="display:visible;">\n    <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>\n  </div>\n\n  <div id="map-not-load"  style="display:none;">\n  Map not loading? <a href="#index" id="refresh">Refresh</a>\n  </div>\n</div>\n\n<div id="error-message" style="display:none;">\n  <h4>There are no trucks near you :(</h4>\n</div>\n');}return __p.join('');};
 }).call(this);
 (function() { this.JST || (this.JST = {}); this.JST["truck_list_item"] = function(obj){var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('',  truck.escape("applicant") ,'\n',  truck.escape("latitude") ,'\n',  truck.escape("longitude") ,'\n');}return __p.join('');};
 }).call(this);
@@ -16904,8 +16904,12 @@ FoodTrucks.Views.Index = Backbone.View.extend({
     $("#spinner").show();
 
     navigator.geolocation.getCurrentPosition(function (pos) { 
-      var latitude = pos.coords.latitude
-      var longitude = pos.coords.longitude
+      // var latitude = pos.coords.latitude
+      // var longitude = pos.coords.longitude
+
+      var latitude = 37.781     // app academy address
+      var longitude = -122.41
+
       var query = { location: {
         latitude: latitude,
         longitude: longitude
@@ -16930,8 +16934,11 @@ FoodTrucks.Views.Index = Backbone.View.extend({
     navigator.geolocation.getCurrentPosition(function (pos) {
       $("#map-spinner").hide();
 
-      this.latitude = pos.coords.latitude;
-      this.longitude = pos.coords.longitude;
+      // this.latitude = pos.coords.latitude;
+      // this.longitude = pos.coords.longitude;
+
+      this.latitude = 37.781     // app academy address
+      this.longitude = -122.41
 
       google.maps.event.addDomListener(window, 'load', function () {
         this.map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -16947,6 +16954,10 @@ FoodTrucks.Views.Index = Backbone.View.extend({
         });
       });
     });
+
+    setTimeout(function () {
+      $("#map-not-load").show();
+    }, 2000);
 
     return this;  
   }
