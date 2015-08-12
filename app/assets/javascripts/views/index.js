@@ -78,10 +78,6 @@ FoodTrucks.Views.Index = Backbone.View.extend({
     window.location.reload()
   },
 
-  renderMap: function () {
-    this.initializeMap(); 
-  },
-
   render: function () {
     var content = this.template();
     this.$el.html(content);
@@ -92,8 +88,8 @@ FoodTrucks.Views.Index = Backbone.View.extend({
 
       // this.latitude = 37.781     // app academy address
       // this.longitude = -122.41
-      console.log(this.latitude, this.longitude)
-      this.renderMap();
+
+      this.initializeMap();
     }.bind(this));
 
     setTimeout(function () {
