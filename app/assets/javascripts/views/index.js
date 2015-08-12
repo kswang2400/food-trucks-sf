@@ -39,11 +39,11 @@ FoodTrucks.Views.Index = Backbone.View.extend({
     $("#spinner").show();
 
     navigator.geolocation.getCurrentPosition(function (pos) { 
-      // var latitude = pos.coords.latitude
-      // var longitude = pos.coords.longitude
+      var latitude = pos.coords.latitude
+      var longitude = pos.coords.longitude
 
-      var latitude = 37.781     // app academy address
-      var longitude = -122.41
+      // var latitude = 37.781     // app academy address
+      // var longitude = -122.41
 
       var query = { location: {
         latitude: latitude,
@@ -67,13 +67,11 @@ FoodTrucks.Views.Index = Backbone.View.extend({
     this.$el.html(content);
 
     navigator.geolocation.getCurrentPosition(function (pos) {
-      $("#map-spinner").hide();
+      this.latitude = pos.coords.latitude;
+      this.longitude = pos.coords.longitude;
 
-      // this.latitude = pos.coords.latitude;
-      // this.longitude = pos.coords.longitude;
-
-      this.latitude = 37.781     // app academy address
-      this.longitude = -122.41
+      // this.latitude = 37.781     // app academy address
+      // this.longitude = -122.41
 
       google.maps.event.addDomListener(window, 'load', function () {
         this.map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -87,6 +85,8 @@ FoodTrucks.Views.Index = Backbone.View.extend({
           map: map,
           title: "You are here!"
         });
+        
+        $("#map-spinner").hide();
       });
     });
 
