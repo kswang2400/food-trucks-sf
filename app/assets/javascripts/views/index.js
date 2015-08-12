@@ -12,20 +12,6 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
     // KW: Don't call rerender or else google maps goes ape shit
     // this.listenTo(this.collection, "sync", this.render);
     // this.listenTo(this.collection, "add", this.addTruckListItemSubview);
-
-    google.maps.event.addDomListener(window, 'load', function () {
-      this.map = new google.maps.Map(document.getElementById('map-canvas'), {
-        zoom: 14,
-        center: {lat: 37.78, lng: -122.41}
-      });
-
-      var myLatlng = new google.maps.LatLng(37.78 ,-122.41);
-      var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        title: "You are here!"
-      });
-    });
   },
 
   addTruckListItemSubview: function (truck) {
@@ -84,6 +70,21 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
     var content = this.template({ trucks: this.collection });
     this.$el.html(content);
     this.attachSubviews();
+
+    google.maps.event.addDomListener(window, 'load', function () {
+      this.map = new google.maps.Map(document.getElementById('map-canvas'), {
+        zoom: 14,
+        center: {lat: 37.78, lng: -122.41}
+      });
+
+      var myLatlng = new google.maps.LatLng(37.78 ,-122.41);
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: "You are here!"
+      });
+    });
+
     return this;  
   }
 });
