@@ -1,22 +1,9 @@
-FoodTrucks.Views.Index = Backbone.CompositeView.extend({
+FoodTrucks.Views.Index = Backbone.View.extend({
   template: JST["index"],
   className: "index col-md-6 col-md-offset-4",
 
   events: {
     "click #search-current": "searchByCurrentLocation"
-  },
-
-  initialize: function (options) {
-    this.collection = options.trucks;
-
-    // KW: Don't call rerender or else google maps goes ape shit
-    // this.listenTo(this.collection, "sync", this.render);
-    // this.listenTo(this.collection, "add", this.addTruckListItemSubview);
-  },
-
-  addTruckListItemSubview: function (truck) {
-    var subview = new FoodTrucks.Views.TruckListItem({ model: truck });
-    this.addSubview("#trucks-list", subview);
   },
 
   addTruckMarker: function (trucks) {
@@ -69,11 +56,10 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
   render: function () {
     var content = this.template();
     this.$el.html(content);
-    this.attachSubviews();
 
     navigator.geolocation.getCurrentPosition(function (pos) {
-      $("#spinner").hide();
-      
+      $("#map-spinner").hide();
+
       this.latitude = pos.coords.latitude;
       this.longitude = pos.coords.longitude;
 
