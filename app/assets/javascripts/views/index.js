@@ -83,6 +83,10 @@ FoodTrucks.Views.Index = Backbone.View.extend({
       });
     });
 
+    setTimeout(function () {
+      $("#map-not-load").show();
+    }, 2000);
+
     return this;  
   }
 });
