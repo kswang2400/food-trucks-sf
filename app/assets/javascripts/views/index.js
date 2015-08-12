@@ -81,7 +81,7 @@ FoodTrucks.Views.Index = Backbone.View.extend({
 
   renderMap: function () {
     alert('rendering map')
-    google.maps.event.addDomListener(window, 'load', this.initializeMap.bind(this)); 
+    this.initializeMap(); 
   },
 
   render: function () {
