@@ -68,8 +68,8 @@ FoodTrucks.Views.Index = Backbone.View.extend({
 
       that.collection.fetch({ 
         data: query,
-        success: that.addTruckMarker, 
-        error: that.handleError
+        success: that.addTruckMarker.bind(that), 
+        error: that.handleError.bind(that)
       });     
     });
   },
