@@ -16852,7 +16852,7 @@ $.fn.locationSearch = function () {
     new $.LocationSearch(this);
   });
 };
-(function() { this.JST || (this.JST = {}); this.JST["index"] = function(obj){var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<h1>All ',  trucks.length ,' Trucks</h1>\n\n<!-- FOR DEVELOPMENT PURPOSES ONLY -->\n<!-- <form id="location-search-form">\n  <input id="form-control" type="text" name="location[latitude]" placeholder="Latitude">\n  <input id="form-control" type="text" name="location[longitude]" placeholder="Longitude">\n\n  <input id="search-input" type="submit" value="Search!">\n</form>\n -->\n\n<div id="spinner" class="spinner" style="display:none;">\n  <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>\n</div>\n\n<input class="btn btn-lg btn-success" id="search-current" type="submit" value="Search by Current Location">\n\n<h4></h4>\n\n<ul id="trucks-list"></ul>\n');}return __p.join('');};
+(function() { this.JST || (this.JST = {}); this.JST["index"] = function(obj){var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<h1>Hungry? Find Food Trucks Near You!</h1>\n\n<input class="btn btn-lg btn-success" id="search-current" type="submit" value="Search by Current Location">\n\n<div id="spinner" class="spinner" style="display:none;">\n  <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>\n</div>\n\n<div id="map-canvas">\n  <div id="spinner" class="spinner" style="display:visible;">\n    <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>\n  </div>\n</div>\n\n</div>\n\n<div id="error-message" style="display:none;">\n  <h4>There are no trucks near you :(</h4>\n</div>\n');}return __p.join('');};
 }).call(this);
 (function() { this.JST || (this.JST = {}); this.JST["truck_list_item"] = function(obj){var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('',  truck.escape("applicant") ,'\n',  truck.escape("latitude") ,'\n',  truck.escape("longitude") ,'\n');}return __p.join('');};
 }).call(this);
@@ -16868,15 +16868,15 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
   className: "index col-md-6 col-md-offset-4",
 
   events: {
-    "click #search-input": "searchByLocation",
     "click #search-current": "searchByCurrentLocation"
   },
 
   initialize: function (options) {
     this.collection = options.trucks;
 
-    this.listenTo(this.collection, "sync", this.render);
-    this.listenTo(this.collection, "add", this.addTruckListItemSubview);
+    // KW: Don't call rerender or else google maps goes ape shit
+    // this.listenTo(this.collection, "sync", this.render);
+    // this.listenTo(this.collection, "add", this.addTruckListItemSubview);
   },
 
   addTruckListItemSubview: function (truck) {
@@ -16884,8 +16884,37 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
     this.addSubview("#trucks-list", subview);
   },
 
+  addTruckMarker: function (trucks) {
+    var that = this;
+
+    trucks.each(function (truck) {
+      var location = truck.get("location")
+      var longitude = location["coordinates"][0]
+      var latitude = location["coordinates"][1]
+      var name = truck.get("applicant")
+      console.log(name, longitude, latitude, truck.get("status"));
+
+      var myLatlng = new google.maps.LatLng(latitude, longitude);
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: that.map,
+        title: name
+      });
+    });
+
+    $("#spinner").hide();
+  },
+
+  handleError: function () {
+    $("#error-message").show();
+    $("#spinner").hide();
+  },
+
   searchByCurrentLocation: function () {
-    $('#spinner').show();
+    var that = this;
+
+    $("#spinner").show();
+
     navigator.geolocation.getCurrentPosition(function (pos) { 
       var latitude = pos.coords.latitude
       var longitude = pos.coords.longitude
@@ -16894,25 +16923,41 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
         longitude: longitude
       }}
 
-      // $("#trucks-list").empty();
-
-      this.collection.fetch({ data: query });     
-    }.bind(this));
+      that.collection.fetch({ 
+        data: query,
+        success: that.addTruckMarker, 
+        error: that.handleError
+      });     
+    });
   },
 
   render: function () {
-    var content = this.template({ trucks: this.collection });
+    var content = this.template();
     this.$el.html(content);
     this.attachSubviews();
+
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      $("#spinner").hide();
+      
+      this.latitude = pos.coords.latitude;
+      this.longitude = pos.coords.longitude;
+
+      google.maps.event.addDomListener(window, 'load', function () {
+        this.map = new google.maps.Map(document.getElementById('map-canvas'), {
+          zoom: 14,
+          center: {lat: this.latitude, lng: this.longitude}
+        });
+
+        var myLatlng = new google.maps.LatLng(this.latitude , this.longitude);
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: "You are here!"
+        });
+      });
+    });
+
     return this;  
-  },
-
-  searchByLocation: function (event) {
-    event.preventDefault();
-
-    var query = this.$el.find("#location-search-form").serializeJSON();
-
-    this.collection.fetch({ data: query });
   }
 });
 FoodTrucks.Views.TruckListItem = Backbone.CompositeView.extend({

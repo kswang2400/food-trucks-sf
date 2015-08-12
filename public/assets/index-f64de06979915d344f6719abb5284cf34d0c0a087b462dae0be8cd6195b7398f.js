@@ -1,2 +1,0 @@
-(function() { this.JST || (this.JST = {}); this.JST["index"] = function(obj){var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<h1>All ',  trucks.length ,' Trucks</h1>\n\n<form id="location-search-form">\n  <input id="form-control" type="text" name="location[latitude]" placeholder="Latitude">\n  <input id="form-control" type="text" name="location[longitude]" placeholder="Longitude">\n\n  <input id="search" type="submit" value="Submit">\n</form>\n\n<ul id="trucks-list"></ul>\n');}return __p.join('');};
-}).call(this);

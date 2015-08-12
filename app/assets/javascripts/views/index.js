@@ -67,21 +67,28 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    var content = this.template({ trucks: this.collection });
+    var content = this.template();
     this.$el.html(content);
     this.attachSubviews();
 
-    google.maps.event.addDomListener(window, 'load', function () {
-      this.map = new google.maps.Map(document.getElementById('map-canvas'), {
-        zoom: 14,
-        center: {lat: 37.78, lng: -122.41}
-      });
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      $("#spinner").hide();
+      
+      this.latitude = pos.coords.latitude;
+      this.longitude = pos.coords.longitude;
 
-      var myLatlng = new google.maps.LatLng(37.78 ,-122.41);
-      var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        title: "You are here!"
+      google.maps.event.addDomListener(window, 'load', function () {
+        this.map = new google.maps.Map(document.getElementById('map-canvas'), {
+          zoom: 14,
+          center: {lat: this.latitude, lng: this.longitude}
+        });
+
+        var myLatlng = new google.maps.LatLng(this.latitude , this.longitude);
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: "You are here!"
+        });
       });
     });
 
