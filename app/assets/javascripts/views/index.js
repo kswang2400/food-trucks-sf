@@ -90,7 +90,10 @@ FoodTrucks.Views.Index = Backbone.View.extend({
       // this.longitude = -122.41
 
       this.initializeMap();
-    }.bind(this));
+    }.bind(this), function (err) {
+      // need to write error handling when user denies permission to use location
+      console.log(err);
+    });
 
     setTimeout(function () {
       $("#map-not-load").show();
