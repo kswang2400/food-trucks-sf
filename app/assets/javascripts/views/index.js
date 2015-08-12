@@ -34,7 +34,6 @@ FoodTrucks.Views.Index = Backbone.View.extend({
   },
 
   initializeMap: function () {
-    alert('in here now')
     this.map = new google.maps.Map(document.getElementById('map-canvas'), {
       zoom: 14,
       center: {lat: this.latitude, lng: this.longitude}
@@ -80,7 +79,6 @@ FoodTrucks.Views.Index = Backbone.View.extend({
   },
 
   renderMap: function () {
-    alert('rendering map')
     this.initializeMap(); 
   },
 
