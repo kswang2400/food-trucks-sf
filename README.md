@@ -2,8 +2,8 @@
 
 [Live Link](https://foodtruckssf.herokuapp.com/)
 
-Problem: Find the closest food trucks near you!
-Solution: Food Trucks SF!
+- Problem: Find the closest food trucks near you!
+- Solution: Food Trucks SF!
 
 Food Trucks SF is a full stack web app built on Rails and Backbone to provide quick access to the nearest food trucks nearest a given address or your location.
 At it's core, FTSF is a one page app that scrapes data from DataSF and present itself with a pleasant UI using Google Maps API. Given some more time, 
@@ -22,5 +22,5 @@ Food Trucks SF is a simple web app that scrapes data from DataSF to find the nea
 
 ## Additional Info
 
-[Portfolio](kswang2400.github.io)
-[Project Tracker](www.projecttracker.biz)
+- [Portfolio](kswang2400.github.io)
+- [Project Tracker](www.projecttracker.biz)
