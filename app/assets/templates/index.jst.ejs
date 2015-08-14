@@ -1,4 +1,4 @@
-<div id="sidebar" class="col-md-3">
+<div id="sidebar" class="col-md-4">
   <h1>Hungry? Find Food Trucks Near You!</h1>
 
   <!-- Location Input -->
@@ -7,17 +7,19 @@
       <input class="form-control" id="search-location" type="text" name="address" placeholder="Enter a location... e.g. 1455 Market St.">
     </form>
 
-    <input class="btn btn-md btn-success" id="search-input" type="submit" value="Search!">
     <input class="btn btn-md btn-success" id="search-current" type="submit" value="Search by Current Location">
+    <input class="btn btn-md btn-success" id="search-input" type="submit" value="Search!">
   </div>
 
   <!-- Map Loading Spinner -->
   <div id="spinner" class="spinner" style="display:none;">
     <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>
   </div>
+
+  <ul id="truck-list"></ul>
 </div>
 
-<div id="full-map" class="col-md-9">
+<div id="full-map" class="col-md-8">
   <!-- Map Canvas -->
   <div id="map-canvas">
     <div id="map-spinner" class="spinner" style="display:visible;">

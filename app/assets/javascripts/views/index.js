@@ -1,4 +1,4 @@
-FoodTrucks.Views.Index = Backbone.View.extend({
+FoodTrucks.Views.Index = Backbone.CompositeView.extend({
   template: JST["index"],
   infoWindowTemplate: JST["marker_overlay"],
   className: "index",
@@ -7,6 +7,17 @@ FoodTrucks.Views.Index = Backbone.View.extend({
     "click #search-current": "searchByCurrentLocation",
     "click #refresh": "refreshPage",
     "click #search-input": "searchInput"
+  },
+
+  initialize: function () {
+    this.listenTo(this.collection, "add", this.addTruckListItem);
+  },
+
+  addTruckListItem: function (truck) {
+    console.log(truck);
+    var subview = new FoodTrucks.Views.TruckListItem({ model: truck });
+
+    this.addSubview("#truck-list", subview);
   },
 
   addTruckMarker: function (trucks) {
@@ -19,6 +30,7 @@ FoodTrucks.Views.Index = Backbone.View.extend({
       var name = truck.get("applicant")
       // console.log(name, longitude, latitude, truck.get("status"));
 
+      // Available Data
       // address: "865 MARKET ST"
       // applicant: "Kettle Corn Star"
       // approved: "2015-04-23T13:59:20.000"
@@ -81,7 +93,6 @@ FoodTrucks.Views.Index = Backbone.View.extend({
     
     this.map.addListener('bounds_changed', function() {
       searchBox.setBounds(this.map.getBounds());
-      this.map.setZoom(14);
     }.bind(this));
 
     var markers = [];
@@ -121,6 +132,8 @@ FoodTrucks.Views.Index = Backbone.View.extend({
 
       that.searchLat = places[0].geometry.location.G
       that.searchLng = places[0].geometry.location.K
+
+      that.map.setZoom(15);
     });
 
     var myLatlng = new google.maps.LatLng(this.latitude , this.longitude);
@@ -143,10 +156,6 @@ FoodTrucks.Views.Index = Backbone.View.extend({
     navigator.geolocation.getCurrentPosition(function (pos) { 
       var latitude = pos.coords.latitude
       var longitude = pos.coords.longitude
-
-      // var latitude = 37.781     // app academy address
-      // var longitude = -122.41
-
       var query = { location: {
         latitude: latitude,
         longitude: longitude
@@ -190,9 +199,6 @@ FoodTrucks.Views.Index = Backbone.View.extend({
     navigator.geolocation.getCurrentPosition(function (pos) {
       this.latitude = pos.coords.latitude;
       this.longitude = pos.coords.longitude;
-
-      // this.latitude = 37.781     // app academy address
-      // this.longitude = -122.41
 
       this.initializeMap();
     }.bind(this), function (err) {
