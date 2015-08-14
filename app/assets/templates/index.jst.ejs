@@ -3,10 +3,6 @@
 
   <!-- Location Input -->
   <div id="search-buttons">
-    <form id="search-location-form">
-      <input class="form-control" id="search-location" type="text" name="address" placeholder="Enter a location... e.g. 1455 Market St.">
-    </form>
-
     <input class="btn btn-md btn-success" id="search-current" type="submit" value="Search by Current Location">
     <input class="btn btn-md btn-success" id="search-input" type="submit" value="Search!">
   </div>
@@ -16,10 +12,13 @@
     <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>
   </div>
 
-  <ul id="truck-list"></ul>
+  <ul id="truck-list" class="list-group scrollable"></ul>
 </div>
 
 <div id="full-map" class="col-md-8">
+  <form id="search-location-form">
+    <input class="form-control" id="search-location" type="text" name="address" placeholder="Enter a location... e.g. 1455 Market St.">
+  </form>
   <!-- Map Canvas -->
   <div id="map-canvas">
     <div id="map-spinner" class="spinner" style="display:visible;">

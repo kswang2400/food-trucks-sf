@@ -1,7 +1,7 @@
 FoodTrucks.Views.TruckListItem = Backbone.CompositeView.extend({
   template: JST["truck_list_item"],
   tagName: "li",
-  className: "truck-list-item",
+  className: "truck-list-item list-group-item",
 
   render: function () {
     var content = this.template({ truck: this.model });

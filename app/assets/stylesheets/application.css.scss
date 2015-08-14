@@ -62,7 +62,7 @@
 .index {
   background-color: #eee;
   padding: 12px;
-  opacity: 0.95;
+  opacity: 1;
   height: 100%;
   text-align: center;
 }
@@ -87,8 +87,19 @@
   margin: 24% 39%;
 }
 
+#truck-list {
+  border: 2px solid black;
+  background-color: white;
+  list-style-type: none;
+  padding-left: 0;
+  height: 570px;
+  overflow: auto;
+}
+
 .truck-list-item {
   margin: 4px;
+  border: 1px solid black;
+  height: 100px;
 }
 
 #trucks-list {
