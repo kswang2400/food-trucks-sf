@@ -18,7 +18,7 @@ module Api
         # KW: query a ton and then paginate in the front end
 
         response = "No trucks near there, where you at?" if response.empty?
-      elsif
+      else
         response = client.get("6a9r-agq8", 
           { "$limit" => 20, 
             "$where" => "latitude IS NOT NULL AND longitude IS NOT NULL" })

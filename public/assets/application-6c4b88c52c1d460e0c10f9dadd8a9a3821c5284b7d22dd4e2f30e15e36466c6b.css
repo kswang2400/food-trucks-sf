@@ -8837,11 +8837,19 @@ html, body, #map-canvas {
 }
 
 /* line 66, /Users/KWangAir/Desktop/food_trucks/app/assets/stylesheets/application.css.scss */
-#search-current {
-  margin: 12px 0px 40px 0px;
+#search-buttons {
+  margin: 12px 0px 20px 0px;
 }
 
 /* line 70, /Users/KWangAir/Desktop/food_trucks/app/assets/stylesheets/application.css.scss */
+#search-location {
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+/* line 77, /Users/KWangAir/Desktop/food_trucks/app/assets/stylesheets/application.css.scss */
 .spinner {
   height: 124px;
   position: absolute;
@@ -8851,12 +8859,12 @@ html, body, #map-canvas {
   margin: 24% 39%;
 }
 
-/* line 79, /Users/KWangAir/Desktop/food_trucks/app/assets/stylesheets/application.css.scss */
+/* line 86, /Users/KWangAir/Desktop/food_trucks/app/assets/stylesheets/application.css.scss */
 .truck-list-item {
   margin: 4px;
 }
 
-/* line 83, /Users/KWangAir/Desktop/food_trucks/app/assets/stylesheets/application.css.scss */
+/* line 90, /Users/KWangAir/Desktop/food_trucks/app/assets/stylesheets/application.css.scss */
 #trucks-list {
   list-style-type: none;
   padding-left: 0;

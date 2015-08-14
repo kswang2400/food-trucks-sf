@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
   $("#spinner").bind("ajaxSend", function() {
     $(this).show();
   }).bind("ajaxStop", function() {

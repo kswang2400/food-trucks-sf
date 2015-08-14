@@ -16807,7 +16807,72 @@ Backbone.CompositeView = Backbone.View.extend({
     }
   }
 });
-$(document).ready(function(){
+// $(document).ready(function () {
+//   var map = new google.maps.Map(document.getElementById('map'), {
+//       center: {lat: -33.8688, lng: 151.2195},
+//       zoom: 13,
+//       mapTypeId: google.maps.MapTypeId.ROADMAP
+//     });
+
+//     // Create the search box and link it to the UI element.
+//     var input = document.getElementById('pac-input');
+//     var searchBox = new google.maps.places.SearchBox(input);
+//     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+//     // Bias the SearchBox results towards current map's viewport.
+//     map.addListener('bounds_changed', function() {
+//       searchBox.setBounds(map.getBounds());
+//     });
+
+//     var markers = [];
+//     // [START region_getplaces]
+//     // Listen for the event fired when the user selects a prediction and retrieve
+//     // more details for that place.
+//     searchBox.addListener('places_changed', function() {
+//       var places = searchBox.getPlaces();
+
+//       if (places.length == 0) {
+//         return;
+//       }
+
+//       // Clear out the old markers.
+//       markers.forEach(function(marker) {
+//         marker.setMap(null);
+//       });
+//       markers = [];
+
+//       // For each place, get the icon, name and location.
+//       var bounds = new google.maps.LatLngBounds();
+//       places.forEach(function(place) {
+//         var icon = {
+//           url: place.icon,
+//           size: new google.maps.Size(71, 71),
+//           origin: new google.maps.Point(0, 0),
+//           anchor: new google.maps.Point(17, 34),
+//           scaledSize: new google.maps.Size(25, 25)
+//         };
+
+//         // Create a marker for each place.
+//         markers.push(new google.maps.Marker({
+//           map: map,
+//           icon: icon,
+//           title: place.name,
+//           position: place.geometry.location
+//         }));
+
+//         if (place.geometry.viewport) {
+//           // Only geocodes have viewport.
+//           bounds.union(place.geometry.viewport);
+//         } else {
+//           bounds.extend(place.geometry.location);
+//         }
+//       });
+//       map.fitBounds(bounds);
+//     });
+//     // [END region_getplaces]
+//   }
+// });
+$(document).ready(function () {
   $("#spinner").bind("ajaxSend", function() {
     $(this).show();
   }).bind("ajaxStop", function() {
@@ -16852,7 +16917,7 @@ $.fn.locationSearch = function () {
     new $.LocationSearch(this);
   });
 };
-(function() { this.JST || (this.JST = {}); this.JST["index"] = function(obj){var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<h1>Hungry? Find Food Trucks Near You!</h1>\n\n<input class="btn btn-lg btn-success" id="search-current" type="submit" value="Search by Current Location">\n\n<div id="spinner" class="spinner" style="display:none;">\n  <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>\n</div>\n\n<div id="map-canvas">\n  <div id="map-spinner" class="spinner" style="display:visible;">\n    <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>\n  </div>\n\n  <div id="map-not-load"  style="display:none;">\n  Map not loading? <a href="#index" id="refresh">Refresh</a>\n  </div>\n</div>\n\n<div id="error-message" style="display:none;">\n  <h4>There are no trucks near you :(</h4>\n</div>\n');}return __p.join('');};
+(function() { this.JST || (this.JST = {}); this.JST["index"] = function(obj){var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<h1>Hungry? Find Food Trucks Near You!</h1>\n\n<!-- Location Input -->\n<div id="search-buttons">\n  <form id="search-location-form">\n    <input class="form-control" id="search-location" type="text" name="address" placeholder="Enter a location... e.g. 1455 Market St.">\n  </form>\n\n  <input class="btn btn-md btn-success" id="search-input" type="submit" value="Search!">\n  <input class="btn btn-md btn-success" id="search-current" type="submit" value="Search by Current Location">\n</div>\n\n<!-- Map Loading Spinner -->\n<div id="spinner" class="spinner" style="display:none;">\n  <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>\n</div>\n\n<!-- Map Canvas -->\n<div id="map-canvas">\n  <div id="map-spinner" class="spinner" style="display:visible;">\n    <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>\n  </div>\n\n  <div id="map-not-load"  style="display:none;">\n  Map not loading? <a href="#index" id="refresh">Refresh</a>\n  </div>\n</div>\n\n<!-- No Trucks Message -->\n<div id="error-message" style="display:none;">\n  <h4>There are no trucks near you :(</h4>\n</div>\n');}return __p.join('');};
 }).call(this);
 (function() { this.JST || (this.JST = {}); this.JST["truck_list_item"] = function(obj){var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('',  truck.escape("applicant") ,'\n',  truck.escape("latitude") ,'\n',  truck.escape("longitude") ,'\n');}return __p.join('');};
 }).call(this);
@@ -16869,7 +16934,8 @@ FoodTrucks.Views.Index = Backbone.View.extend({
 
   events: {
     "click #search-current": "searchByCurrentLocation",
-    "click #refresh": "refreshPage"
+    "click #refresh": "refreshPage",
+    "click #search-input": "searchInput"
   },
 
   addTruckMarker: function (trucks) {
@@ -16899,9 +16965,58 @@ FoodTrucks.Views.Index = Backbone.View.extend({
   },
 
   initializeMap: function () {
+    var that = this;
     this.map = new google.maps.Map(document.getElementById('map-canvas'), {
-      zoom: 14,
+      zoom: 15,
       center: {lat: this.latitude, lng: this.longitude}
+    });
+
+    var input = $("#search-location")[0];
+    var searchBox = new google.maps.places.SearchBox(input);
+    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    
+    this.map.addListener('bounds_changed', function() {
+      searchBox.setBounds(this.map.getBounds());
+      this.map.setZoom(15);
+    }.bind(this));
+
+    var markers = [];
+
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
+
+      // Clear out the old markers.
+      markers.forEach(function(marker) {
+        marker.setMap(null);
+      });
+      markers = [];
+
+      // For each place, get the icon, name and location.
+      var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        // Create a marker for each place.
+        markers.push(new google.maps.Marker({
+          map: that.map,
+          title: place.name,
+          position: place.geometry.location
+        }));
+
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+
+      that.map.fitBounds(bounds);
+
+      that.searchLat = places[0].geometry.location.G
+      that.searchLng = places[0].geometry.location.K
     });
 
     var myLatlng = new google.maps.LatLng(this.latitude , this.longitude);
@@ -16910,11 +17025,12 @@ FoodTrucks.Views.Index = Backbone.View.extend({
       map: this.map,
       title: "You are here!"
     });
-    
+
     $("#map-spinner").hide();
   },
 
-  searchByCurrentLocation: function () {
+  searchByCurrentLocation: function (event) {
+    event.preventDefault();
     var that = this;
 
     $("#spinner").show();
@@ -16933,18 +17049,31 @@ FoodTrucks.Views.Index = Backbone.View.extend({
 
       that.collection.fetch({ 
         data: query,
-        success: that.addTruckMarker, 
-        error: that.handleError
+        success: that.addTruckMarker.bind(that), 
+        error: that.handleError.bind(that)
       });     
+    });
+  },
+
+  searchInput: function (event) {
+    event.preventDefault();
+    var that = this;
+    $("#spinner").show();
+
+    query = { "location": {
+      latitude: this.searchLat,
+      longitude: this.searchLng
+    }}
+
+    this.collection.fetch({
+      data: query,
+      success: that.addTruckMarker.bind(that), 
+      error: that.handleError.bind(that)
     });
   },
 
   refreshPage: function () {
     window.location.reload()
-  },
-
-  renderMap: function () {
-    this.initializeMap(); 
   },
 
   render: function () {
@@ -16957,13 +17086,16 @@ FoodTrucks.Views.Index = Backbone.View.extend({
 
       // this.latitude = 37.781     // app academy address
       // this.longitude = -122.41
-      console.log(this.latitude, this.longitude)
-      this.renderMap();
-    }.bind(this));
+
+      this.initializeMap();
+    }.bind(this), function (err) {
+      // need to write error handling when user denies permission to use location
+      console.log(err);
+    });
 
     setTimeout(function () {
       $("#map-not-load").show();
-    }, 2000);
+    }, 2500);
 
     return this;  
   }
