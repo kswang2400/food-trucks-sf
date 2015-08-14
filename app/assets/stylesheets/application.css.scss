@@ -33,11 +33,16 @@
   margin-top: 50px;
 }
 
-html, body, #map-canvas {
-  height: 500px;
+#full-map {
+  height: 100%;
+  /*width: 100%;*/
+}
+
+#map-canvas {
+  height: 100%;
   margin: 0;
   padding: 0;
-  width: 675;
+  width: 100%;
 }
 
 #location-search-form {
@@ -57,9 +62,9 @@ html, body, #map-canvas {
 .index {
   background-color: #eee;
   padding: 12px;
-  opacity: 0.9;
+  opacity: 0.95;
+  height: 100%;
   text-align: center;
-  margin-top: 30px;
 }
 
 #search-buttons {

@@ -1,32 +1,36 @@
-<h1>Hungry? Find Food Trucks Near You!</h1>
+<div id="sidebar" class="col-md-3">
+  <h1>Hungry? Find Food Trucks Near You!</h1>
 
-<!-- Location Input -->
-<div id="search-buttons">
-  <form id="search-location-form">
-    <input class="form-control" id="search-location" type="text" name="address" placeholder="Enter a location... e.g. 1455 Market St.">
-  </form>
+  <!-- Location Input -->
+  <div id="search-buttons">
+    <form id="search-location-form">
+      <input class="form-control" id="search-location" type="text" name="address" placeholder="Enter a location... e.g. 1455 Market St.">
+    </form>
 
-  <input class="btn btn-md btn-success" id="search-input" type="submit" value="Search!">
-  <input class="btn btn-md btn-success" id="search-current" type="submit" value="Search by Current Location">
-</div>
+    <input class="btn btn-md btn-success" id="search-input" type="submit" value="Search!">
+    <input class="btn btn-md btn-success" id="search-current" type="submit" value="Search by Current Location">
+  </div>
 
-<!-- Map Loading Spinner -->
-<div id="spinner" class="spinner" style="display:none;">
-  <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>
-</div>
-
-<!-- Map Canvas -->
-<div id="map-canvas">
-  <div id="map-spinner" class="spinner" style="display:visible;">
+  <!-- Map Loading Spinner -->
+  <div id="spinner" class="spinner" style="display:none;">
     <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>
   </div>
-
-  <div id="map-not-load"  style="display:none;">
-  Map not loading? <a href="#index" id="refresh">Refresh</a>
-  </div>
 </div>
 
-<!-- No Trucks Message -->
-<div id="error-message" style="display:none;">
-  <h4>There are no trucks near you :(</h4>
+<div id="full-map" class="col-md-9">
+  <!-- Map Canvas -->
+  <div id="map-canvas">
+    <div id="map-spinner" class="spinner" style="display:visible;">
+      <img id="img-spinner" src="http://www.pjstar.com/Global/images/loading_big.gif" alt="Loading"/>
+    </div>
+
+    <div id="map-not-load"  style="display:none;">
+    Map not loading? <a href="#index" id="refresh">Refresh</a>
+    </div>
+  </div>
+
+  <!-- No Trucks Message -->
+  <div id="error-message" style="display:none;">
+    <h4>There are no trucks near you :(</h4>
+  </div>
 </div>

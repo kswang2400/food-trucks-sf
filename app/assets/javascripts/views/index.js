@@ -1,7 +1,7 @@
 FoodTrucks.Views.Index = Backbone.View.extend({
   template: JST["index"],
   infoWindowTemplate: JST["marker_overlay"],
-  className: "index col-md-6 col-md-offset-4",
+  className: "index",
 
   events: {
     "click #search-current": "searchByCurrentLocation",
@@ -71,7 +71,7 @@ FoodTrucks.Views.Index = Backbone.View.extend({
   initializeMap: function () {
     var that = this;
     this.map = new google.maps.Map(document.getElementById('map-canvas'), {
-      zoom: 15,
+      zoom: 14,
       center: {lat: this.latitude, lng: this.longitude}
     });
 
@@ -81,7 +81,7 @@ FoodTrucks.Views.Index = Backbone.View.extend({
     
     this.map.addListener('bounds_changed', function() {
       searchBox.setBounds(this.map.getBounds());
-      this.map.setZoom(15);
+      this.map.setZoom(14);
     }.bind(this));
 
     var markers = [];
