@@ -59,10 +59,13 @@
   background-size: 100% 100%;
 }
 
+#map-spinner {
+  margin-top: 25%;
+}
+
 .index {
   background-color: #eee;
   padding: 12px;
-  opacity: 1;
   height: 100%;
   text-align: center;
 }
@@ -78,13 +81,13 @@
   width: 50%;
 }
 
-.spinner {
+#spinner {
   height: 124px;
   position: absolute;
   overflow: auto;
   width: 124px;
   z-index:10;
-  margin: 24% 39%;
+  margin: 33%;
 }
 
 #truck-list {
