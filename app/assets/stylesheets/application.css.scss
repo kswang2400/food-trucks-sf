@@ -100,9 +100,16 @@
 }
 
 .truck-list-item {
-  margin: 4px;
+  /*margin: 4px;*/
   border: 1px solid black;
-  height: 100px;
+  height: 120px;
+  text-align: left;
+  overflow: auto;
+}
+
+.truck-list-item:hover {
+  background-color: #aaa;
+  cursor: pointer;
 }
 
 #trucks-list {

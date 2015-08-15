@@ -10,13 +10,11 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
   },
 
   initialize: function () {
-    this.listenTo(this.collection, "add", this.addTruckListItem);
+    // this.listenTo(this.collection, "add", this.addTruckListItem);
   },
 
   addTruckListItem: function (truck) {
-    console.log(truck);
     var subview = new FoodTrucks.Views.TruckListItem({ model: truck });
-
     this.addSubview("#truck-list", subview);
   },
 
@@ -70,6 +68,8 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
       marker.addListener('click', function() {
         infowindow.open(that.map, marker);
       });
+
+      that.addTruckListItem(truck);
     });
 
     $("#spinner").hide();
