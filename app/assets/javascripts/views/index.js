@@ -18,6 +18,29 @@ FoodTrucks.Views.Index = Backbone.CompositeView.extend({
     var that = this;
 
     trucks.each(function (truck) {
+      // address: "350 08TH ST"
+      // applicant: "Mini Mobile Food Catering"
+      // approved: "2015-03-12T14:30:02.000"
+      // block: "3756"
+      // blocklot: "3756003"
+      // cnn: "414000"
+      // expirationdate: "2016-03-15T00:00:00.000"
+      // facilitytype: "Truck"
+      // fooditems: "Cold Truck: Corn Dogs: Noodle Soups: Candy: Pre-packaged Snacks: Sandwiches: Chips: Coffee: Tea: Various Beverages"
+      // latitude: "37.7736941524749"
+      // location: Object
+      // locationdescription: "08TH ST: HERON ST to HARRISON ST (350 - 399)"
+      // longitude: "-122.409658441356"
+      // lot: "003"
+      // objectid: "630927"
+      // permit: "15MFF-0058"
+      // priorpermit: "1"
+      // received: "Mar 12 2015 2:24PM"
+      // schedule: "http://bsm.sfdpw.org/PermitsTracker/reports/report.aspx?title=schedule&report=rptSchedule&params=permit=15MFF-0058&ExportPDF=1&Filename=15MFF-0058_schedule.pdf"
+      // status: "APPROVED"
+      // x: "6009763.073"
+      // y: "2109812.608"
+
       var location = truck.get("location");
       var longitude = location["coordinates"][0];
       var latitude = location["coordinates"][1];
